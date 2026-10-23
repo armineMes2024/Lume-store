@@ -88,13 +88,15 @@ export default function Header({
             <button
               className="header__action"
               onClick={() => {
-                setSearchOpen(true);
-                window.setTimeout(() => inputRef.current?.focus(), 80);
                 window.setTimeout(() => {
                   document
                     .getElementById("catalog")
                     ?.scrollIntoView({ behavior: "smooth", block: "start" });
-                }, 120);
+                }, 40);
+                window.setTimeout(() => {
+                  const input = document.querySelector("#catalog .catalog__search-inline input");
+                  if (input) input.focus();
+                }, 500);
               }}
             >
               <Search size={18} strokeWidth={1.4} />
@@ -137,22 +139,24 @@ export default function Header({
             <X size={22} strokeWidth={1.5} />
           </button>
         </div>
-        <form
-          className="mobile-menu__search container"
-          onSubmit={(event) => {
-            event.preventDefault();
-            goToCatalog();
-          }}
-        >
+        <div className="mobile-menu__search container">
           <Search size={18} strokeWidth={1.5} />
           <input
             type="search"
             value={query}
-            onChange={(event) => onQueryChange(event.target.value)}
-            placeholder="Поиск..."
+            onChange={(event) => {
+              onQueryChange(event.target.value);
+              closeMenu();
+              window.setTimeout(() => {
+                document
+                  .getElementById("catalog")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }, 80);
+            }}
+            placeholder="Поиск"
             aria-label="Поиск по каталогу"
           />
-        </form>
+        </div>
 
         <nav className="mobile-menu__nav container">
           {navItems.map((item) => (

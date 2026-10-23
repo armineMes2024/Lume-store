@@ -61,7 +61,7 @@ export default function Catalog({
             <input
               value={query}
               onChange={(event) => onQueryChange(event.target.value)}
-              placeholder="Поиск по названию"
+              placeholder="Поиск"
               aria-label="Поиск по каталогу"
             />
             {query && <button onClick={() => onQueryChange("")}>Сбросить</button>}
