@@ -85,23 +85,28 @@ export default function Header({
           </nav>
 
           <div className="header__actions">
-            <button
-              className="header__action"
-              onClick={() => {
-                window.setTimeout(() => {
-                  document
-                    .getElementById("catalog")
-                    ?.scrollIntoView({ behavior: "smooth", block: "start" });
-                }, 40);
-                window.setTimeout(() => {
-                  const input = document.querySelector("#catalog .catalog__search-inline input");
-                  if (input) input.focus();
-                }, 500);
-              }}
-            >
+            <div className="header__search-wrap">
               <Search size={18} strokeWidth={1.4} />
-              <span>Поиск</span>
-            </button>
+              <input
+                className="header__search-input"
+                value={query}
+                onChange={(event) => onQueryChange(event.target.value)}
+                onFocus={() => {
+                  window.setTimeout(() => {
+                    document
+                      .getElementById("catalog")
+                      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }, 40);
+                }}
+                placeholder="Поиск"
+                aria-label="Поиск по каталогу"
+              />
+              {query && (
+                <button className="header__search-clear" onClick={() => onQueryChange("")}>
+                  <X size={16} strokeWidth={1.4} />
+                </button>
+              )}
+            </div>
 
             <button className="header__action header__action--icon" onClick={onToggleTheme} aria-label="Сменить тему">
               {theme === "dark" ? (

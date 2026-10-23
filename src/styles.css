@@ -204,7 +204,32 @@ p {
 .header__actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+}
+
+.header__search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  height: 38px;
+}
+
+.header__search-input {
+  border: 0;
+  background: transparent;
+  width: 160px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 11px;
+}
+
+.header__search-clear {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
 }
 
 .header__action {
@@ -998,6 +1023,10 @@ p {
 
   .header__actions {
     justify-self: end;
+  }
+
+  .header__search-input {
+    width: 120px;
   }
 
   .header__action span:not(.header__count):not(.header__dot) {
